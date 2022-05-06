@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Digital Clock Work</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="" type="" href="main.js">
+  </head>
+  <body>
+    <div id="time">
+      <div class="circle">
+        <svg>
+          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70"></circle>
+        </svg>
+        <div id="hours">00</div>
+      </div>
+      <div class="circle">
+        <svg>
+          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70"></circle>
+        </svg>
+        <div id="minutes">00</div>
+      </div>
+      <div class="circle">
+        <svg>
+          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70"></circle>
+        </svg>
+        <div id="seconds">00</div>
+      </div>
+      <div class="ap">
+        <div id="AmPm">AM</div>
+      </div>
+    </div>
+
+  <script>
+    setInterval(() =>{
+      let hours = document.getElementById('hours');
+      let minutes = document.getElementById('minutes');
+      let seconds = document.getElementById('seconds');
+      let AmPm = document.getElementById('AmPm');
+
+      let h = new Date().getHours();
+      let m = new Date().getMinutes();
+      let s = new Date().getSeconds();
+      let am = h >= 12 ? "PM" : "AM";
+    
+      //converte relógio de 24hrs para 12hrs
+      if( h > 12){
+        h = h - 12;
+      }
+
+      //add um zero antes de um digito sozinho
+      h = (h < 10) ? "0" + h : h;
+      m = (m < 10) ? "0" + m : m;
+      s = (s < 10) ? "0" + s : s;
+
+      hours.innerHTML = h;
+      minutes.innerHTML = m;
+      seconds.innerHTML = s;
+      AmPm.innerHTML = am;
+    });
+  </script>
+  </body>
+</html>
