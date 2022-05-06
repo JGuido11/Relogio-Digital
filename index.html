@@ -7,24 +7,27 @@
   </head>
   <body>
     <div id="time">
-      <div class="circle">
+      <div class="circle" style="--clr:#ff2972;">
+        <div class="dots hr_dot"></div>
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
-          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70" id="hh"></circle>
         </svg>
         <div id="hours">00</div>
       </div>
-      <div class="circle">
+      <div class="circle" style="--clr:#fee800;">
+        <div class="dots min_dot"></div>
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
-          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70" id="mm"></circle>
         </svg>
         <div id="minutes">00</div>
       </div>
-      <div class="circle">
+      <div class="circle" style="--clr:#04fc43;">
+        <div class="dots seg_dot"></div>
         <svg>
           <circle cx="70" cy="70" r="70"></circle>
-          <circle cx="70" cy="70" r="70"></circle>
+          <circle cx="70" cy="70" r="70" id="ss"></circle>
         </svg>
         <div id="seconds">00</div>
       </div>
@@ -39,6 +42,14 @@
       let minutes = document.getElementById('minutes');
       let seconds = document.getElementById('seconds');
       let AmPm = document.getElementById('AmPm');
+
+      let hh = document.getElementById('hh');
+      let mm = document.getElementById('mm');
+      let ss = document.getElementById('ss');
+
+      let hr_dot = document.querySelector('.hr_dot');
+      let min_dot = document.querySelector('.min_dot');
+      let seg_dot= document.querySelector('.seg_dot');
 
       let h = new Date().getHours();
       let m = new Date().getMinutes();
@@ -55,10 +66,19 @@
       m = (m < 10) ? "0" + m : m;
       s = (s < 10) ? "0" + s : s;
 
-      hours.innerHTML = h;
-      minutes.innerHTML = m;
-      seconds.innerHTML = s;
+      hours.innerHTML = h + "<br><span>Horas</span>";
+      minutes.innerHTML = m + "<br><span>Minutos</span>";
+      seconds.innerHTML = s + "<br><span>Segundos</span>";
       AmPm.innerHTML = am;
+
+      hh.style.strokeDashoffset = 440 - (440 * h) /12; //Relógio de 12horas
+      mm.style.strokeDashoffset = 440 - (440 * m) /60; //60 minutos
+      ss.style.strokeDashoffset = 440 - (440 * s) /60; //60 segundos
+
+      hr_dot.style.transform = `rotate(${h * 30}deg)`; // 360 / 12 = 30
+      min_dot.style.transform = `rotate(${m * 6}deg)`; // 360 / 12 = 6
+      seg_dot.style.transform = `rotate(${s * 6}deg)`; // 360 / 12 = 6
+
     });
   </script>
   </body>
